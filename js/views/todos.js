@@ -9,11 +9,15 @@ app.TodoView = Backbone.View.extend({
     events: {
         'dbclick label': 'edit',
         'keypress .edit': 'updateOnEnter',
-        'blur .edit': 'close'
+        'blur .edit': 'close',
+        'click .toggle': 'togglecompleted',
+        'click .destroy': 'clear'
     },
 
     initialize: function() {
         this.listenTo(this.model, 'change', this.render);
+        this.listenTo(this.model, 'destroy', this.remove);
+        this.listenTo(this.model, 'visible', this.toggleVisible);
     },
 
     render: function() {
@@ -48,6 +52,8 @@ app.TodoView = Backbone.View.extend({
 
         if(value) {
             this.model.save({ title: value});
+        } else {
+            this.clear();
         }
 
         this.$el.removeClass('editing');
