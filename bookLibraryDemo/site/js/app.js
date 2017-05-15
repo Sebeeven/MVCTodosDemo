@@ -11,5 +11,6 @@ $(function() {
     //     {title: 'Eloquent Javascript', author: 'Marijin Haverbeke', releaseDate: '2011', keywords: 'Javascript Programming'}
     // ];
 
+    $('#releaseDate').datepicker();
     new app.LibraryView( /*books*/);
 });
